@@ -1,0 +1,5 @@
+# /etc/conf.d/pcap-snmp-monitor
+
+CFG_FILE="/etc/pcap-snmp-monitor.conf"
+
+PID_FILE="/var/run/pcap-snmp-monitor.pid"

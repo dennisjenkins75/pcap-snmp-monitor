@@ -1,0 +1,20 @@
+#!/sbin/runscript
+
+depend() {
+	need net
+}
+
+start() {
+	ebegin "Starting pcap-snmp-monitor daemon"
+	export GMON_OUT_PREFIX="/tmp/pcap-snmp-monitor.gmon.out"
+	start-stop-daemon --start --quiet --pidfile "${PID_FILE}" \
+		--exec /usr/local/sbin/pcap-snmp-monitor -- -c "${CFG_FILE}" -d &>/dev/null
+	eend $?
+}
+
+stop() {
+	ebegin "Shutting down pcap-snmp-monitor daemon"
+	start-stop-daemon --stop --quiet --pidfile "${PID_FILE}" \
+		--exec /usr/local/sbin/pcap-snmp-monitor
+	eend $?
+}
